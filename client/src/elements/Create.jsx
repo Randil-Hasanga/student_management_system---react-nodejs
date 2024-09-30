@@ -19,10 +19,8 @@ const Create = () => {
 
     axios.post('/add_user', values)
     .then((res) => {
-
-      navigate('/');
       console.log(res);
-
+      navigate('/');
     })
     .catch((err) => {
       console.log(err);
