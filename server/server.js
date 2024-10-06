@@ -41,3 +41,53 @@ app.post('/add_user', (req, res) =>{
         return res.json({message: "Successfully updated the database"});
     });
 })
+
+app.get('/students', (req, res) => {
+    sql = "SELECT * FROM student_details";
+
+    db.query(sql, (err, result) => {
+        if(err){
+            console.log(err);
+            return res.json({message: "Something unexpected has occurred"});
+        }
+        console.log('success');
+        return res.json(result);
+    })
+});
+
+app.get('/get_student/:id', (req, res) => {
+    const id = req.params.id;
+
+    const sql = "SELECT * FROM student_details WHERE id = ?";
+
+    db.query(sql,[id], (err, result) => {
+        if(err){
+            console.log(err);
+            return res.json({message: "Something unexpected has occurred"});
+        }
+        console.log('success');
+        return res.json(result[0]);
+    });
+});
+
+app.post('/edit_user/:id', (req, res) => {
+    const id = req.params.id;
+
+    const values = [
+        req.body.name,
+        req.body.email,
+        req.body.gender,
+        req.body.age,
+        id
+    ];
+
+    const sql = "UPDATE student_details SET name = ?, email = ?, gender = ?, age = ? WHERE id = ?";
+    db.query(sql, values, (err, result) => {
+        if(err){
+            console.log(err);
+            return res.json({message: "Something unexpected has occurred"});
+        }
+        console.log('success');
+        return res.json({message: "Successfully updated the database"});
+    })
+})
