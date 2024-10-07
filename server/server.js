@@ -90,4 +90,19 @@ app.post('/edit_user/:id', (req, res) => {
         console.log('success');
         return res.json({message: "Successfully updated the database"});
     })
+});
+
+app.delete("/delete/:id", (req, res) => {
+    const id = req.params.id;
+
+    sql = "DELETE FROM student_details WHERE id = ?";
+
+    db.query(sql, id, (err, result) => {
+        if(err){
+            console.log(err);
+            return res.json({message: "Something unexpected has occurred"});
+        }
+        console.log('success');
+        return res.json({message: "Successfully Deleted"});
+    })
 })
