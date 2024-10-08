@@ -2,7 +2,6 @@ const express = require('express');
 const mysql =  require('mysql');
 const cors =  require('cors');
 const path =  require('path');
-const { error } = require('console');
 
 const app = express();
 
@@ -10,13 +9,13 @@ app.use(express.static(path.join(__dirname, "public")));
 app.use(cors());
 app.use(express.json());
 
-const port = 5000;
+const port = process.env.PORT || 5000;
 
 const db = mysql.createConnection({
-    host: "127.0.0.1",
-    user: "root",
-    password: "1234",
-    database: "students"
+    host: "axxb6a0z2kydkco3.cbetxkdyhwsb.us-east-1.rds.amazonaws.com",
+    user: "t15cf8jcqmc1c6ws",
+    password: "tbt74pjbm2u0r51f",
+    database: "hjq021j7ansmb4ip"
 });
 
 app.listen(port, () => {
